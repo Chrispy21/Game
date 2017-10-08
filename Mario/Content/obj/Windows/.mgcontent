@@ -4,9 +4,9 @@
   <Platform>Windows</Platform>
   <Config />
   <SourceFiles>
-    <File>C:/Users/Chris-PC/Documents/GitHub/Mario/Mario/Content/Controls/Button.png</File>
-    <File>C:/Users/Chris-PC/Documents/GitHub/Mario/Mario/Content/Fonts/Font.spritefont</File>
-    <File>C:/Users/Chris-PC/Documents/GitHub/Mario/Mario/Content/Others/character.png</File>
-    <File>C:/Users/Chris-PC/Documents/GitHub/Mario/Mario/Content/iconmario.ico</File>
+    <File>C:/Users/Chris-PC/Documents/GitHub/Game/Mario/Content/Controls/Button.png</File>
+    <File>C:/Users/Chris-PC/Documents/GitHub/Game/Mario/Content/Fonts/Font.spritefont</File>
+    <File>C:/Users/Chris-PC/Documents/GitHub/Game/Mario/Content/Others/character.png</File>
+    <File>C:/Users/Chris-PC/Documents/GitHub/Game/Mario/Content/iconmario.ico</File>
   </SourceFiles>
 </SourceFileCollection>

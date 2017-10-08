@@ -21,7 +21,7 @@ namespace Mario.States
 
             var newGameButton = new Button(buttonTexture, buttonFont)
             {
-                Position = new Vector2(300, 200),
+                Position = new Vector2(300, 150),
                 Text = "New Game",
             };
 
@@ -37,7 +37,7 @@ namespace Mario.States
 
             var quitGameButton = new Button(buttonTexture, buttonFont)
             {
-                Position = new Vector2(300, 300),
+                Position = new Vector2(300, 350),
                 Text = "Quit Game",
             };
 

@@ -10,7 +10,6 @@ namespace Mario
     /// </summary>
     public class Game1 : Game
     {
-        public GraphicsDeviceManager window;
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         Texture2D character;
@@ -29,9 +28,9 @@ namespace Mario
 
         public void GameWindow()
         {
-            window.PreferredBackBufferWidth = 800;
-            window.PreferredBackBufferHeight = 600;
-            window.ApplyChanges();
+            graphics.PreferredBackBufferWidth = 1080;
+            graphics.PreferredBackBufferHeight = 720;
+            graphics.ApplyChanges();
         }
 
         public Game1()
@@ -48,6 +47,8 @@ namespace Mario
         /// </summary>
         protected override void Initialize()
         {
+            Window.Title = "Mordecai game";
+
             IsMouseVisible = true;
 
             GameWindow();
@@ -145,7 +146,7 @@ namespace Mario
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.Gray);
 
             _currentState.Draw(gameTime, spriteBatch);
 
