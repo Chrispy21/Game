@@ -1,4 +1,5 @@
-﻿using Mario.States;
+﻿using Mario.Controls;
+using Mario.States;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -10,16 +11,12 @@ namespace Mario
     /// </summary>
     public class Game1 : Game
     {
-        GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
-        Texture2D character;
-
-        private State _currentState;
-
+        internal GraphicsDeviceManager graphics;
+        SpriteBatch spriteBatch; 
+        Texture2D[] groundTextures = new Texture2D[10];
+        internal static Game1 Instance { get; private set; }
+        private State _currentState;        
         private State _nextState;
-
-        int characterX;
-        int characterY;
 
         public void ChangeState(State state)
         {
@@ -29,7 +26,7 @@ namespace Mario
         public void GameWindow()
         {
             graphics.PreferredBackBufferWidth = 1080;
-            graphics.PreferredBackBufferHeight = 720;
+            graphics.PreferredBackBufferHeight = 680;
             graphics.ApplyChanges();
         }
 
@@ -37,6 +34,7 @@ namespace Mario
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+            Instance = this;
         }
 
         /// <summary>
@@ -65,9 +63,16 @@ namespace Mario
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            character = Content.Load<Texture2D>("Others/character");
-
+            Mordecai.character = Content.Load<Texture2D>("Others/character");
+            Mordecai.mordecai_down = Content.Load<Texture2D>("Others/mordecai_down");
+            Mordecai.mordecai_jump = Content.Load<Texture2D>("Others/mordecai_jump");
+            Mordecai.character_right = Content.Load<Texture2D>("Others/character_right");
+            
             _currentState = new MenuState(this, graphics.GraphicsDevice, Content);
+
+            //PAUSE
+            
+
         }
 
         /// <summary>
@@ -100,43 +105,6 @@ namespace Mario
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            KeyboardState keyboardState = Keyboard.GetState();
-
-            if (keyboardState.IsKeyDown(Keys.Left))
-            {
-                characterX -= 10;
-                
-            }
-            if (keyboardState.IsKeyDown(Keys.Right))
-            {
-                characterX += 10;
-            }
-            if (keyboardState.IsKeyDown(Keys.Up))
-            {
-                characterY -= 10;
-            }
-            if (keyboardState.IsKeyDown(Keys.Down))
-            {
-                characterY += 10;
-            }
-
-            if (characterX < 0)
-            {
-                characterX = 0;
-            }
-            else if (characterX + character.Width > graphics.PreferredBackBufferWidth)
-            {
-                characterX = graphics.PreferredBackBufferWidth - character.Width;
-            }
-            if (characterY < 0)
-            {
-                characterY = 0;
-            }
-            else if (characterY + character.Height > graphics.PreferredBackBufferHeight)
-            {
-                characterY = graphics.PreferredBackBufferHeight - character.Height;
-            }
-
             base.Update(gameTime);
         }
 
@@ -147,15 +115,13 @@ namespace Mario
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.Gray);
+ 
+            spriteBatch.Begin();
 
             _currentState.Draw(gameTime, spriteBatch);
 
-            spriteBatch.Begin();
-
-            spriteBatch.Draw(character, new Vector2(characterX, characterY), Color.White);
-
             spriteBatch.End();
-
+            
             base.Draw(gameTime);
         }
     }

@@ -4,9 +4,14 @@
   <Platform>Windows</Platform>
   <Config />
   <SourceFiles>
-    <File>C:/Users/Chris-PC/Documents/GitHub/Game/Mario/Content/Controls/Button.png</File>
-    <File>C:/Users/Chris-PC/Documents/GitHub/Game/Mario/Content/Fonts/Font.spritefont</File>
-    <File>C:/Users/Chris-PC/Documents/GitHub/Game/Mario/Content/Others/character.png</File>
-    <File>C:/Users/Chris-PC/Documents/GitHub/Game/Mario/Content/iconmario.ico</File>
+    <File>C:/Users/Chris/Documents/GitHub/Game/Mario/Content/Controls/Button.png</File>
+    <File>C:/Users/Chris/Documents/GitHub/Game/Mario/Content/Fonts/Font.spritefont</File>
+    <File>C:/Users/Chris/Documents/GitHub/Game/Mario/Content/Others/character.png</File>
+    <File>C:/Users/Chris/Documents/GitHub/Game/Mario/Content/iconmario.ico</File>
+    <File>C:/Users/Chris/Documents/GitHub/Game/Mario/Content/Others/block.png</File>
+    <File>C:/Users/Chris/Documents/GitHub/Game/Mario/Content/Others/mordecai_down.png</File>
+    <File>C:/Users/Chris/Documents/GitHub/Game/Mario/Content/Others/mordecai_jump.png</File>
+    <File>C:/Users/Chris/Documents/GitHub/Game/Mario/Content/Others/character_right.png</File>
+    <File>C:/Users/Chris/Documents/GitHub/Game/Mario/Content/Others/pause.png</File>
   </SourceFiles>
 </SourceFileCollection>

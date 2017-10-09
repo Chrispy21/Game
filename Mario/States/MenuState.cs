@@ -21,7 +21,7 @@ namespace Mario.States
 
             var newGameButton = new Button(buttonTexture, buttonFont)
             {
-                Position = new Vector2(300, 150),
+                Position = new Vector2(465, 260),
                 Text = "New Game",
             };
 
@@ -29,7 +29,7 @@ namespace Mario.States
 
             var loadGameButton = new Button(buttonTexture, buttonFont)
             {
-                Position = new Vector2(300, 250),
+                Position = new Vector2(465, 320),
                 Text = "Load Game",
             };
 
@@ -37,7 +37,7 @@ namespace Mario.States
 
             var quitGameButton = new Button(buttonTexture, buttonFont)
             {
-                Position = new Vector2(300, 350),
+                Position = new Vector2(465, 380),
                 Text = "Quit Game",
             };
 
@@ -53,14 +53,12 @@ namespace Mario.States
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            spriteBatch.Begin();
 
             foreach (var component in _components)
                 component.Draw(gameTime, spriteBatch);
 
-            
 
-            spriteBatch.End();
+            
         }
 
         public override void Update(GameTime gameTime)
@@ -76,7 +74,8 @@ namespace Mario.States
 
         private void newGameButton_Click(object sender, EventArgs e)
         {
-            _game.ChangeState(new GameState(_game, _graphicsDevice, _content)); 
+            _game.ChangeState(new GameState(_game, _graphicsDevice, _content));
+
         }
 
         private void loadGameButton_Click(object sender, EventArgs e)

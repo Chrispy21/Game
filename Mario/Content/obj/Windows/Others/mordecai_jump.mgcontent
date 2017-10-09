@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>C:/Users/Chris/Documents/GitHub/Game/Mario/Content/Controls/Button.png</SourceFile>
-  <SourceTime>2017-10-09T22:03:35.5142621+02:00</SourceTime>
-  <DestFile>C:/Users/Chris/Documents/GitHub/Game/Mario/Content/bin/Windows/Controls/Button.xnb</DestFile>
-  <DestTime>2017-10-09T22:04:11.6669895+02:00</DestTime>
+  <SourceFile>C:/Users/Chris/Documents/GitHub/Game/Mario/Content/Others/mordecai_jump.png</SourceFile>
+  <SourceTime>2017-10-09T12:14:37.0890502+02:00</SourceTime>
+  <DestFile>C:/Users/Chris/Documents/GitHub/Game/Mario/Content/bin/Windows/Others/mordecai_jump.xnb</DestFile>
+  <DestTime>2017-10-09T12:44:25.5270223+02:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2017-03-01T16:05:36+01:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
