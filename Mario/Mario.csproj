@@ -51,6 +51,8 @@
     <Compile Include="States\GameState.cs" />
     <Compile Include="States\MenuState.cs" />
     <Compile Include="States\State.cs" />
+    <Compile Include="Temp\Character.cs" />
+    <Compile Include="Temp\Platform.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">

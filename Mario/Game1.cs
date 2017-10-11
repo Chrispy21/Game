@@ -1,8 +1,12 @@
 ﻿using Mario.Controls;
 using Mario.States;
+using Mario.Temp;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
+using System.Collections.Generic;
 
 namespace Mario
 {
@@ -12,11 +16,21 @@ namespace Mario
     public class Game1 : Game
     {
         internal GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch; 
+        SpriteBatch spriteBatch;
         Texture2D[] groundTextures = new Texture2D[10];
         internal static Game1 Instance { get; private set; }
-        private State _currentState;        
+        private State _currentState;
         private State _nextState;
+
+        //gravitációhoz
+        public Character player;
+
+        //Platformokhoz
+        List<Platform> platforms = new List<Platform>();
+
+        //hangok
+        SoundEffect effect;
+        Song song;
 
         //Pause
         bool paused = false;
@@ -69,11 +83,24 @@ namespace Mario
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
+            //gravitációhoz
+            player = new Character(Content.Load<Texture2D>("Others/character"), new Vector2(50, 50));
+
+            //platformokhoz
+            platforms.Add(new Platform(Content.Load<Texture2D>("Others/block"), new Vector2(30, 400)));
+            platforms.Add(new Platform(Content.Load<Texture2D>("Others/block"), new Vector2(350, 300)));
+            platforms.Add(new Platform(Content.Load<Texture2D>("Others/block"), new Vector2(700, 350)));
+
+            //hangok
+            effect = Content.Load<SoundEffect>("Jump");
+            song = Content.Load<Song>("Pyro");
+            MediaPlayer.Play(song);
+
             Mordecai.character = Content.Load<Texture2D>("Others/character");
             Mordecai.mordecai_down = Content.Load<Texture2D>("Others/mordecai_down");
             Mordecai.mordecai_jump = Content.Load<Texture2D>("Others/mordecai_jump");
             Mordecai.character_right = Content.Load<Texture2D>("Others/character_right");
-            
+
             _currentState = new MenuState(this, graphics.GraphicsDevice, Content);
 
             IsMouseVisible = true;
@@ -115,12 +142,10 @@ namespace Mario
 
             _currentState.PostUpdate(gameTime);
 
-            //if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-            //Exit();
 
             MouseState mouse = Mouse.GetState();
 
-            if(!paused)
+            if (!paused)
             {
                 if (Keyboard.GetState().IsKeyDown(Keys.Escape))
                 {
@@ -128,16 +153,19 @@ namespace Mario
                     btnPlay.isClicked = false;
                 }
 
+                //pause menu
                 //enemy.Update();
-                //State.Update();
+
+                //gravitációhoz
+                player.Update(gameTime, effect);
             }
             else if (paused)
             {
-                if(btnPlay.isClicked)
+                if (btnPlay.isClicked)
                 {
                     paused = false;
                 }
-                if(btnQuit.isClicked)
+                if (btnQuit.isClicked)
                 {
                     Exit();
                 }
@@ -147,6 +175,14 @@ namespace Mario
 
             }
 
+            //platformhoz
+            /*foreach (Platform platform in platforms)
+                if (player.rectangle.isOnTopOf(platform.rectangle))
+                {
+                    player.velocity = 0f;
+                    player.hasJumped = false;
+                }
+            */
             base.Update(gameTime);
         }
 
@@ -157,12 +193,19 @@ namespace Mario
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.Gray);
- 
+
             spriteBatch.Begin();
+
+            //gravitációhoz
+            player.Draw(spriteBatch);
+
+            //platformokhoz
+            foreach (Platform platform in platforms)
+                platform.Draw(spriteBatch);
 
             _currentState.Draw(gameTime, spriteBatch);
 
-            if(paused)
+            if (paused)
             {
                 spriteBatch.Draw(pausedTexture, pausedRectangle, Color.White);
                 btnPlay.Draw(spriteBatch);
@@ -170,8 +213,21 @@ namespace Mario
             }
 
             spriteBatch.End();
-            
+
             base.Draw(gameTime);
         }
+    }
+}
+
+//platformokhoz
+static class RectangleHelper
+{
+    const int penetrationMargin = 5;
+    public static bool isOnTopOf(this Rectangle r1, Rectangle r2)
+    {
+        return (r1.Bottom >= r2.Top - penetrationMargin && 
+            r1.Bottom <= r2.Top + 1 && 
+            r1.Right >= r2.Left + 5 && 
+            r1.Left <= r2.Right - 5);
     }
 }

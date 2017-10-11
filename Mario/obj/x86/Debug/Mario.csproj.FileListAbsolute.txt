@@ -89,3 +89,6 @@ C:\Users\Chris\Documents\GitHub\Game\Mario\bin\Windows\x86\Debug\Content\Others\
 C:\Users\Chris\Documents\GitHub\Game\Mario\bin\Windows\x86\Debug\Content\Others\pause.xnb
 C:\Users\Chris\Documents\GitHub\Game\Mario\bin\Windows\x86\Debug\Content\Controls\btnExit.xnb
 C:\Users\Chris\Documents\GitHub\Game\Mario\bin\Windows\x86\Debug\Content\Controls\btnNG.xnb
+C:\Users\Chris\Documents\GitHub\Game\Mario\bin\Windows\x86\Debug\Content\Jump.xnb
+C:\Users\Chris\Documents\GitHub\Game\Mario\bin\Windows\x86\Debug\Content\Pyro.xnb
+C:\Users\Chris\Documents\GitHub\Game\Mario\bin\Windows\x86\Debug\Content\Pyro.wma
