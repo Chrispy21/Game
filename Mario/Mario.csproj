@@ -43,13 +43,13 @@
   <ItemGroup>
     <Compile Include="Component.cs" />
     <Compile Include="Controls\Button.cs" />
+    <Compile Include="Controls\ButtonPause.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Mordecai.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="States\GameState.cs" />
     <Compile Include="States\MenuState.cs" />
-    <Compile Include="States\Pause.cs" />
     <Compile Include="States\State.cs" />
   </ItemGroup>
   <ItemGroup>

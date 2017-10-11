@@ -18,6 +18,12 @@ namespace Mario
         private State _currentState;        
         private State _nextState;
 
+        //Pause
+        bool paused = false;
+        Texture2D pausedTexture;
+        Rectangle pausedRectangle;
+        ButtonPause btnPlay, btnQuit;
+
         public void ChangeState(State state)
         {
             _nextState = state;
@@ -70,8 +76,15 @@ namespace Mario
             
             _currentState = new MenuState(this, graphics.GraphicsDevice, Content);
 
+            IsMouseVisible = true;
+
             //PAUSE
-            
+            pausedTexture = Content.Load<Texture2D>("Others/pause");
+            pausedRectangle = new Rectangle(0, 0, pausedTexture.Width, pausedTexture.Height);
+            btnPlay = new ButtonPause();
+            btnPlay.Load(Content.Load<Texture2D>("Controls/btnNG"), new Vector2(465, 260));
+            btnQuit = new ButtonPause();
+            btnQuit.Load(Content.Load<Texture2D>("Controls/btnExit"), new Vector2(465, 360));
 
         }
 
@@ -102,8 +115,37 @@ namespace Mario
 
             _currentState.PostUpdate(gameTime);
 
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Exit();
+            //if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+            //Exit();
+
+            MouseState mouse = Mouse.GetState();
+
+            if(!paused)
+            {
+                if (Keyboard.GetState().IsKeyDown(Keys.Escape))
+                {
+                    paused = true;
+                    btnPlay.isClicked = false;
+                }
+
+                //enemy.Update();
+                //State.Update();
+            }
+            else if (paused)
+            {
+                if(btnPlay.isClicked)
+                {
+                    paused = false;
+                }
+                if(btnQuit.isClicked)
+                {
+                    Exit();
+                }
+
+                btnPlay.Update(mouse);
+                btnQuit.Update(mouse);
+
+            }
 
             base.Update(gameTime);
         }
@@ -119,6 +161,13 @@ namespace Mario
             spriteBatch.Begin();
 
             _currentState.Draw(gameTime, spriteBatch);
+
+            if(paused)
+            {
+                spriteBatch.Draw(pausedTexture, pausedRectangle, Color.White);
+                btnPlay.Draw(spriteBatch);
+                btnQuit.Draw(spriteBatch);
+            }
 
             spriteBatch.End();
             
