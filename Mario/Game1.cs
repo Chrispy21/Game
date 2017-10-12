@@ -22,6 +22,9 @@ namespace Mario
         private State _currentState;
         private State _nextState;
 
+        //háttér
+        private Texture2D background;
+
         //gravitációhoz
         public Character player;
 
@@ -82,6 +85,9 @@ namespace Mario
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
+
+            //háttér
+            background = Content.Load<Texture2D>("Others/bg");
 
             //gravitációhoz
             player = new Character(Content.Load<Texture2D>("Others/character"), new Vector2(50, 50));
@@ -175,6 +181,7 @@ namespace Mario
 
             }
 
+
             //platformhoz
             /*foreach (Platform platform in platforms)
                 if (player.rectangle.isOnTopOf(platform.rectangle))
@@ -193,8 +200,10 @@ namespace Mario
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.Gray);
-
+            
             spriteBatch.Begin();
+
+            spriteBatch.Draw(background, new Rectangle(0, 0, 1080, 680), Color.White);
 
             //gravitációhoz
             player.Draw(spriteBatch);
