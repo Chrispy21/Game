@@ -60,6 +60,23 @@ namespace Mario.Temp
 
             if (hasJumped == false)
                 velocity.Y = 0f;
+
+            if (position.X < 0)
+            {
+                position.X = 0;
+            }
+            else if (position.X + texture.Width > Game1.Instance.graphics.PreferredBackBufferWidth)
+            {
+                position.X = Game1.Instance.graphics.PreferredBackBufferWidth - texture.Width;
+            }
+            if (position.Y < 0)
+            {
+                position.Y = 0;
+            }
+            else if (position.Y + texture.Height > Game1.Instance.graphics.PreferredBackBufferHeight)
+            {
+                position.Y = Game1.Instance.graphics.PreferredBackBufferHeight - texture.Height;
+            }
         }
 
         public void Draw(SpriteBatch spriteBatch)

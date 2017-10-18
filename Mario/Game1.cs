@@ -22,6 +22,12 @@ namespace Mario
         private State _currentState;
         private State _nextState;
 
+        //kamera követés
+        private Camera _camera;
+        public static int ScreenHeight;
+        public static int ScreenWidth;
+        private List<Component> _components;
+
         //háttér
         private Texture2D background;
 
@@ -68,6 +74,9 @@ namespace Mario
         /// </summary>
         protected override void Initialize()
         {
+            ScreenHeight = graphics.PreferredBackBufferHeight;
+            ScreenWidth = graphics.PreferredBackBufferWidth;
+
             Window.Title = "Mordecai game";
 
             IsMouseVisible = true;
@@ -86,11 +95,22 @@ namespace Mario
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
+            //gravitációhoz
+            player = new Character(Content.Load<Texture2D>("Others/character"), new Vector2(50, 50));
+
+            //Kamera követés
+            _camera = new Camera();
+
+            _components = new List<Component>()
+            {
+                new Sprite(Content.Load<Texture2D>("Others/bg")),
+                //player,
+                new Sprite(Content.Load<Texture2D>("Others/bg"))
+            };
+
             //háttér
             background = Content.Load<Texture2D>("Others/bg");
 
-            //gravitációhoz
-            player = new Character(Content.Load<Texture2D>("Others/character"), new Vector2(50, 50));
 
             //platformokhoz
             platforms.Add(new Platform(Content.Load<Texture2D>("Others/block"), new Vector2(30, 400)));
@@ -200,7 +220,7 @@ namespace Mario
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.Gray);
-            
+
             spriteBatch.Begin();
 
             spriteBatch.Draw(background, new Rectangle(0, 0, 1080, 680), Color.White);
@@ -234,9 +254,9 @@ static class RectangleHelper
     const int penetrationMargin = 5;
     public static bool isOnTopOf(this Rectangle r1, Rectangle r2)
     {
-        return (r1.Bottom >= r2.Top - penetrationMargin && 
-            r1.Bottom <= r2.Top + 1 && 
-            r1.Right >= r2.Left + 5 && 
+        return (r1.Bottom >= r2.Top - penetrationMargin &&
+            r1.Bottom <= r2.Top + 1 &&
+            r1.Right >= r2.Left + 5 &&
             r1.Left <= r2.Right - 5);
     }
 }
